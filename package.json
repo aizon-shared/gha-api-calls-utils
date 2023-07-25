@@ -5,7 +5,10 @@
   "scripts": {
     "prebuild": "rm -rf lib",
     "build": "tsc",
-    "lint": "eslint **/*.ts"
+    "lint": "eslint **/*.ts",
+    "prepackage": "rm -rf dist",
+    "package:get-last-tags": "ncc build lib/get-last-tags -o dist/get-last-tags",
+    "package": "npm run package:get-last-tags"
   },
   "repository": {
     "type": "git",
