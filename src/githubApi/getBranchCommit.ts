@@ -1,8 +1,9 @@
-import { Octokit } from "@octokit/rest";
+import { getOctokit } from "@actions/github";
 import { GITHUB_API_VERSION } from "../../constants";
 
 // It returns the commit sha of a branch (last commit).
-export default async (client: Octokit, owner: string, repo: string, branch: string) => {
+export default async (token: string , owner: string, repo: string, branch: string) => {
+  const client = getOctokit(token);
   const { data } = await client.request('GET /repos/{owner}/{repo}/branches/{branch}', {
     owner,
     repo,

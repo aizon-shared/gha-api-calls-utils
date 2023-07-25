@@ -1,5 +1,4 @@
 import core from '@actions/core';
-import { Octokit } from '@octokit/rest';
 
 import getTags from './githubApi/getTags';
 import getBranchCommit from './githubApi/getBranchCommit';
@@ -9,14 +8,14 @@ type tag = string;
 
 export default async () => {
   try {
-    const client = new Octokit({ auth: core.getInput('token') });
     const repositories: Array<string> = JSON.parse(core.getInput('repositories'));
+    const token = core.getInput('token');
     const owner = core.getInput('owner');
     const branch = core.getInput('branch');
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
-      const commit = await getBranchCommit(client, owner, repo, branch);
-      const tags = await getTags(client, owner, repo);
+      const commit = await getBranchCommit(token, owner, repo, branch);
+      const tags = await getTags(token, owner, repo);
 
       const tagInLastCommit = tags.find((tag) => tag.commit.sha === commit)?.name;
 

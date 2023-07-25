@@ -1,8 +1,9 @@
-import { Octokit } from "@octokit/rest";
+import { getOctokit } from "@actions/github";
 import { GITHUB_API_VERSION } from "../../constants";
 
 // It returns the tags of a repository.
-export default async (client: Octokit, owner: string, repo: string) => {
+export default async (token: string, owner: string, repo: string) => {
+  const client = getOctokit(token);
   const { data } = await client.request('GET /repos/{owner}/{repo}/tags', {
     owner,
     repo,
