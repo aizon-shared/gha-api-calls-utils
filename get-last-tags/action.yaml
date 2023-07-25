@@ -19,4 +19,4 @@ outputs:
     description: 'Stringified JSON with the last tag of each repository'
 runs:
   using: 'node16'
-  main: 'dist/repositoriesLastTags.js'
+  main: 'dist/get-last-tags.js'
