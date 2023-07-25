@@ -1,0 +1,22 @@
+name: 'Query Jira issues and filter'
+author: Aizon.ai
+description: 'Runs a query in Jira issues and run a filter upon the results if the filter is provided'
+inputs:
+  token:
+    description: 'Jira auth token'
+    required: true
+  host:
+    description: 'Jira host'
+    required: true
+  query:
+    description: 'Query string to be run in Jira (JQL)'
+  fields:
+    description: 'Fields to be returned by the query (separated by comma)'
+  filter:
+    description: 'Filter function to be run upon the issues of the query (js filter)'
+outputs:
+  results:
+    description: 'Final query results after applying the filter'
+runs:
+  using: 'node16'
+  main: 'index.js'
