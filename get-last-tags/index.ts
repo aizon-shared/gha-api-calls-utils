@@ -1,7 +1,7 @@
 import core from '@actions/core';
 
-import getTags from './githubApi/getTags';
-import getBranchCommit from './githubApi/getBranchCommit';
+import getTags from '../src/githubApi/getTags';
+import getBranchCommit from '../src/githubApi/getBranchCommit';
 
 type repository = string;
 type tag = string;
