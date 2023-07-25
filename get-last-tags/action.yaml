@@ -1,0 +1,22 @@
+name: 'Get last tags'
+description: 'Takes an array of repository names and outputs a json with the last tag of each repository'
+inputs:
+  githubToken:
+    description: 'Github token'
+    required: true
+  repositories:
+    description: 'Array of repository names'
+    required: true
+    default: '[]'
+  branch:
+    description: 'Branch to check for tags'
+    default: 'main'
+  owner:
+    description: 'Owner of the repositories'
+    required: true
+outputs:
+  json:
+    description: 'Stringified JSON with the last tag of each repository'
+runs:
+  using: 'node16'
+  main: 'dist/repositoriesLastTags.js'
