@@ -13,8 +13,6 @@ async function run(): Promise<void> {
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
 
-    console.log('HEREEEEEE')
-
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
       const commit = await getBranchCommit(token, owner, repo, branch);
       const tags = await getTags(token, owner, repo);
@@ -32,7 +30,7 @@ async function run(): Promise<void> {
 
     core.setOutput('latestTags', JSON.stringify(latestTags));
   } catch (error) {
-    core.setFailed((error as Error).message);
+    core.setFailed(error as Error);
   }
 }
 
