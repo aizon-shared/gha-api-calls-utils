@@ -13,6 +13,7 @@ async function run(): Promise<void> {
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
 
+    core.debug(`repositories: ${repositories}`);
     core.debug(typeof repositories);
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {

@@ -52,6 +52,7 @@ function run() {
             const token = core.getInput('githubToken');
             const owner = core.getInput('repositoryOwner');
             const branch = core.getInput('branch');
+            core.debug(`repositories: ${repositories}`);
             core.debug(typeof repositories);
             const repoTagPairs = yield Promise.all(repositories.map((repo) => __awaiter(this, void 0, void 0, function* () {
                 var _a;
