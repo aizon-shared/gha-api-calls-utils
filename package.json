@@ -5,7 +5,9 @@
   "scripts": {
     "prebuild": "rm -rf lib",
     "build": "tsc",
-    "lint": "eslint **/*.ts"
+    "lint": "eslint **/*.ts",
+    "prepackage": "rm -rf dist && mkdir dist && npm run build",
+    "package": "ncc build lib/actions/getLatestTags.js -o dist/get-latest-tags"
   },
   "repository": {
     "type": "git",
