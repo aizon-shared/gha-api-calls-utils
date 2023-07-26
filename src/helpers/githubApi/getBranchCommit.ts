@@ -1,4 +1,4 @@
-import { getOctokit, context } from "@actions/github";
+import { getOctokit } from "@actions/github";
 
 // It returns the commit sha of a branch (latest commit).
 export default async (client: ReturnType<typeof getOctokit>, owner: string, repo: string, branch: string) => {
