@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "Defines the actions involved in the release process",
   "scripts": {
-    "prebuild": "rm -rf lib",
-    "build": "tsc",
-    "lint": "eslint **/*.ts",
-    "prepackage": "rm -rf dist && mkdir dist && npm run build",
-    "package": "ncc build lib/actions/getLatestTags.js -o dist/get-latest-tags"
+    "prebuild": "rm -rf lib && rm -rf dist && mkdir dist",
+    "build:get-lastest-tags": "ncc build lib/actions/getLatestTags.js -o dist/get-latest-tags",
+    "build": "tsc && npm run build:get-lastest-tags",
+    "lint": "eslint **/*.ts"
   },
   "repository": {
     "type": "git",
