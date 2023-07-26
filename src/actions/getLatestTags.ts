@@ -13,10 +13,10 @@ async function run(): Promise<void> {
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
 
-    core.debug(`repositories: '${repositories}`);
-    core.debug(`token: '${token}`);
-    core.debug(`owner: '${owner}`);
-    core.debug(`branch: '${branch}`);
+    core.debug(`repositories: ${repositories}`);
+    core.debug(`token: ${token}`);
+    core.debug(`owner: ${owner}`);
+    core.debug(`branch: ${branch}`);
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
       const commit = await getBranchCommit(token, owner, repo, branch);
