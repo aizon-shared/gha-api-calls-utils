@@ -52,8 +52,7 @@ function run() {
             const token = core.getInput('githubToken');
             const owner = core.getInput('repositoryOwner');
             const branch = core.getInput('branch');
-            core.debug(`repositories: ${repositories}`);
-            core.debug(typeof repositories);
+            console.log('HEREEEEEE');
             const repoTagPairs = yield Promise.all(repositories.map((repo) => __awaiter(this, void 0, void 0, function* () {
                 var _a;
                 const commit = yield (0, getBranchCommit_1.default)(token, owner, repo, branch);
@@ -108,6 +107,7 @@ const github_1 = __nccwpck_require__(5438);
 const constants_1 = __nccwpck_require__(5105);
 // It returns the commit sha of a branch (latest commit).
 exports["default"] = (token, owner, repo, branch) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('Inside getBranchCommit');
     const client = (0, github_1.getOctokit)(token);
     const { data } = yield client.request('GET /repos/{owner}/{repo}/branches/{branch}', {
         owner,
