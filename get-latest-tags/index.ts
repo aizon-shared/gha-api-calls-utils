@@ -13,10 +13,10 @@ export default async () => {
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
 
-    console.log('repositories', repositories);
-    console.log('token', token);
-    console.log('owner', owner);
-    console.log('branch', branch);
+    core.debug(`repositories: '${repositories}`);
+    core.debug(`token: '${token}`);
+    core.debug(`owner: '${owner}`);
+    core.debug(`branch: '${branch}`);
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
       const commit = await getBranchCommit(token, owner, repo, branch);
