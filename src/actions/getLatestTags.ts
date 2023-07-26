@@ -1,5 +1,6 @@
 import * as core from '@actions/core';
-import { Octokit } from 'octokit'
+import { Octokit } from 'octokit';
+import fetch from 'node-fetch';
 
 import getTags from '../helpers/githubApi/getTags';
 import getBranchCommit from '../helpers/githubApi/getBranchCommit';
@@ -14,7 +15,12 @@ async function run(): Promise<void> {
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
 
-    const client = new Octokit({ auth: token });
+    const client = new Octokit({
+      auth: token,
+      request: {
+        fetch,
+      },
+    });
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
       const commit = await getBranchCommit(client, owner, repo, branch);
