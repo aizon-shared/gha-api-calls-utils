@@ -1,5 +1,5 @@
-name: 'Get last tags'
-description: 'Takes an array of repository names and outputs a json with the last tag of each repository'
+name: 'Get latest tags'
+description: 'Takes an array of repository names and outputs a json with the latest tag of each repository'
 inputs:
   githubToken:
     description: 'Github token'
@@ -15,8 +15,8 @@ inputs:
     description: 'Owner of the repositories'
     required: true
 outputs:
-  json:
-    description: 'Stringified JSON with the last tag of each repository'
+  latestTags:
+    description: 'Stringified JSON with the latest tag of each repository'
 runs:
   using: 'node16'
-  main: '../lib/get-last-tags/index.js'
+  main: '../lib/get-latest-tags/index.js'

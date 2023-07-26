@@ -17,18 +17,18 @@ export default async () => {
       const commit = await getBranchCommit(token, owner, repo, branch);
       const tags = await getTags(token, owner, repo);
 
-      const tagInLastCommit = tags.find((tag) => tag.commit.sha === commit)?.name;
+      const tagInLatestCommit = tags.find((tag) => tag.commit.sha === commit)?.name;
 
-      if (!tagInLastCommit) {
+      if (!tagInLatestCommit) {
         throw new Error(`Tag not found in latest commit (${commit}) for repository ${repo}`);
       }
       
-      return [repo, tagInLastCommit];
+      return [repo, tagInLatestCommit];
     }));
 
     const latestTags: Record<repository, tag> = Object.fromEntries(repoTagPairs);
 
-    return latestTags;
+    core.setOutput('time', JSON.stringify(latestTags));
   } catch (error) {
     core.setFailed((error as Error).message);
   }
