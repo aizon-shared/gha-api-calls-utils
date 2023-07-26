@@ -6,7 +6,7 @@ import getBranchCommit from '../src/githubApi/getBranchCommit';
 type repository = string;
 type tag = string;
 
-export default async () => {
+async function run(): Promise<void> {
   try {
     const repositories: Array<string> = JSON.parse(core.getInput('repositories'));
     const token = core.getInput('githubToken');
@@ -38,3 +38,5 @@ export default async () => {
     core.setFailed((error as Error).message);
   }
 }
+
+run();
