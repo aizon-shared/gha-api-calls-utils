@@ -28,7 +28,7 @@ export default async () => {
 
     const latestTags: Record<repository, tag> = Object.fromEntries(repoTagPairs);
 
-    core.setOutput('time', JSON.stringify(latestTags));
+    core.setOutput('latestTags', JSON.stringify(latestTags));
   } catch (error) {
     core.setFailed((error as Error).message);
   }
