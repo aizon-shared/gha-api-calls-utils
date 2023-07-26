@@ -8,12 +8,12 @@ inputs:
     description: 'Array of repository names'
     required: true
     default: '[]'
+  repositoryOwner:
+    description: 'Owner of the repositories'
+    required: true
   branch:
     description: 'Branch to check for tags'
     default: 'main'
-  owner:
-    description: 'Owner of the repositories'
-    required: true
 outputs:
   latestTags:
     description: 'Stringified JSON with the latest tag of each repository'

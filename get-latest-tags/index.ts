@@ -9,9 +9,14 @@ type tag = string;
 export default async () => {
   try {
     const repositories: Array<string> = JSON.parse(core.getInput('repositories'));
-    const token = core.getInput('token');
-    const owner = core.getInput('owner');
+    const token = core.getInput('githubToken');
+    const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
+
+    console.log('repositories', repositories);
+    console.log('token', token);
+    console.log('owner', owner);
+    console.log('branch', branch);
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
       const commit = await getBranchCommit(token, owner, repo, branch);
