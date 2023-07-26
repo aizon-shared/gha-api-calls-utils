@@ -13,10 +13,10 @@ async function run(): Promise<void> {
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
 
-    core.debug(`repositories: ${repositories}`);
-    core.debug(`token: ${token}`);
-    core.debug(`owner: ${owner}`);
-    core.debug(`branch: ${branch}`);
+    core.debug(`repositories: ${core.getInput('repositories')}`);
+    core.debug(`token: ${core.getInput('githubToken')}`);
+    core.debug(`owner: ${core.getInput('repositoryOwner')}`);
+    core.debug(`branch: ${core.getInput('branch')}`);
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
       const commit = await getBranchCommit(token, owner, repo, branch);
