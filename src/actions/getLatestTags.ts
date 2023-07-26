@@ -1,4 +1,4 @@
-import core from '@actions/core';
+import * as core from '@actions/core';
 
 import getTags from '../helpers/githubApi/getTags';
 import getBranchCommit from '../helpers/githubApi/getBranchCommit';
