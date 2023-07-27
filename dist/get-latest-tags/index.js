@@ -94,6 +94,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 // It returns the commit sha of a branch (latest commit).
 exports["default"] = (client, owner, repo, branch) => __awaiter(void 0, void 0, void 0, function* () {
+    // GET /repos/{owner}/{repo}/branches/{branch}
     const { data } = yield client.rest.repos.getBranch({
         owner,
         repo,
@@ -122,6 +123,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 // It returns the tags of a repository.
 exports["default"] = (client, owner, repo) => __awaiter(void 0, void 0, void 0, function* () {
+    // GET /repos/{owner}/{repo}/tags
     const { data } = yield client.rest.repos.listTags({
         owner,
         repo,
