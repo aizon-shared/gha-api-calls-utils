@@ -10,7 +10,7 @@ type tag = string;
 async function run(): Promise<void> {
   try {
     const repositories: Array<string> = core.getInput('repositories').split(',');
-    const token = core.getInput('githubToken');
+    const token = core.getInput('token');
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
 

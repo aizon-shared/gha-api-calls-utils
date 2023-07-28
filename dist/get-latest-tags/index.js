@@ -50,7 +50,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const repositories = core.getInput('repositories').split(',');
-            const token = core.getInput('githubToken');
+            const token = core.getInput('token');
             const owner = core.getInput('repositoryOwner');
             const branch = core.getInput('branch');
             const client = (0, github_1.getOctokit)(token);
