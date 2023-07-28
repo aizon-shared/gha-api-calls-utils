@@ -2,7 +2,7 @@ name: 'Get latest tags'
 author: Aizon.ai
 description: 'Takes an array of repository names and outputs a json with the latest tag of each repository'
 inputs:
-  githubToken:
+  token:
     description: 'Github token'
     required: true
   repositories:
