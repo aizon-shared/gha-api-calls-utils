@@ -49,10 +49,12 @@ const getBranchCommit_1 = __importDefault(__nccwpck_require__(3761));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
+            console.log(core.getInput('repositories'));
             const repositories = JSON.parse(core.getInput('repositories'));
             const token = core.getInput('githubToken');
             const owner = core.getInput('repositoryOwner');
             const branch = core.getInput('branch');
+            console.log(repositories);
             const client = (0, github_1.getOctokit)(token);
             const repoTagPairs = yield Promise.all(repositories.map((repo) => __awaiter(this, void 0, void 0, function* () {
                 var _a;
