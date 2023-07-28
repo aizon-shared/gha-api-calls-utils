@@ -31,7 +31,7 @@ async function run(): Promise<void> {
 
     const latestTags: Record<repository, tag> = Object.fromEntries(repoTagPairs);
 
-    core.setOutput('latestTags', JSON.stringify(latestTags));
+    core.setOutput('latestTags', latestTags);
   } catch (error) {
     console.error(error);
     core.setFailed(error as Error);

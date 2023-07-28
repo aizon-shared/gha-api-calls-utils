@@ -65,7 +65,7 @@ function run() {
                 return [repo, tagInLatestCommit];
             })));
             const latestTags = Object.fromEntries(repoTagPairs);
-            core.setOutput('latestTags', JSON.stringify(latestTags));
+            core.setOutput('latestTags', latestTags);
         }
         catch (error) {
             console.error(error);
