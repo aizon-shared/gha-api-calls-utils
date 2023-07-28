@@ -17,6 +17,7 @@ async function run(): Promise<void> {
     const client = getOctokit(token);
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
+      console.log(`Getting latest tag for repository ${repo}`)
       const commit = await getBranchCommit(client, owner, repo, branch);
       const tags = await getTags(client, owner, repo);
 
