@@ -9,12 +9,10 @@ type tag = string;
 
 async function run(): Promise<void> {
   try {
-    console.log(core.getInput('repositories'))
-    const repositories: Array<string> = JSON.parse(core.getInput('repositories'));
+    const repositories: Array<string> = core.getInput('repositories').split(',');
     const token = core.getInput('githubToken');
     const owner = core.getInput('repositoryOwner');
     const branch = core.getInput('branch');
-    console.log(repositories)
 
     const client = getOctokit(token);
 
