@@ -56,7 +56,6 @@ function run() {
             const client = (0, github_1.getOctokit)(token);
             const repoTagPairs = yield Promise.all(repositories.map((repo) => __awaiter(this, void 0, void 0, function* () {
                 var _a;
-                console.log(`Getting latest tag for repository ${repo}`);
                 const commit = yield (0, getBranchCommit_1.default)(client, owner, repo, branch);
                 const tags = yield (0, getTags_1.default)(client, owner, repo);
                 const tagInLatestCommit = (_a = tags.find((tag) => tag.commit.sha === commit)) === null || _a === void 0 ? void 0 : _a.name;
@@ -69,6 +68,7 @@ function run() {
             core.setOutput('latestTags', JSON.stringify(latestTags));
         }
         catch (error) {
+            console.error(error);
             core.setFailed(error);
         }
     });
