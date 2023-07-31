@@ -9,7 +9,7 @@ inputs:
     description: 'Array of repository names'
     required: true
     default: '[]'
-  repositoryOwner:
+  owner:
     description: 'Owner of the repositories'
     required: true
   branch:
@@ -17,7 +17,7 @@ inputs:
     default: 'main'
 outputs:
   latestTags:
-    description: 'Stringified JSON with the latest tag of each repository'
+    description: 'JSON with the latest tag of each repository'
 runs:
   using: 'node16'
   main: '../dist/get-latest-tags/index.js'

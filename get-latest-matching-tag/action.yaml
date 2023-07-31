@@ -1,0 +1,22 @@
+name: 'Get latest matching tag'
+author: Aizon.ai
+description: 'Gets the latest tag matching the prefix input and outputs its name'
+inputs:
+  token:
+    description: 'Github token'
+    required: true
+  repository:
+    description: 'Repository name'
+    required: true
+  owner:
+    description: 'Owner of the repository'
+    required: true
+  prefix:
+    description: 'Branch to check for tags'
+    default: ''
+outputs:
+  tag:
+    description: 'Name of the latest tag matching the prefix input'
+runs:
+  using: 'node16'
+  main: 'src/actions/getLatestMatchingTag.js'
