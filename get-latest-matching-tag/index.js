@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import { getOctokit } from "@actions/github";
 
-import getTags from '../helpers/githubApi/getTags';
+import getTags from '../src/helpers/githubApi/getTags';
 
 async function run() {
   try {

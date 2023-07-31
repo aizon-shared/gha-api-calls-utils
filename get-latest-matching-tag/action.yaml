@@ -21,4 +21,4 @@ outputs:
     description: 'Name of the latest tag matching the prefix input if any'
 runs:
   using: 'node16'
-  main: 'src/actions/getLatestMatchingTag.js'
+  main: 'index.js'
