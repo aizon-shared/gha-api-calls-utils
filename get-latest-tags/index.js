@@ -1,8 +1,8 @@
 import * as core from '@actions/core';
 import { getOctokit } from "@actions/github";
 
-import getTags from '../src/helpers/githubApi/getTags';
-import getBranchCommit from '../src/helpers/githubApi/getBranchCommit';
+import getTags from '../src/helpers/githubApi/getTags.js';
+import getBranchCommit from '../src/helpers/githubApi/getBranchCommit.js';
 
 async function run() {
   try {
