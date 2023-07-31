@@ -19,7 +19,7 @@ Takes an array of repository names and outputs a json with the latest tag of eac
 | Name | Description | Required | Default |
 | --- | --- | --- | --- |
 | token | Github token | true | |
-| repositories | Repository names separated by comma (,) | true | '' (empty string) |
+| repositories | Repository names separated by comma (,) | false | |
 | owner | Owner of the repositories | true | `${{github.repository_owner}}` |
 | branch | Branch to check for tags | true | main |
 

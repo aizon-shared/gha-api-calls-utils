@@ -7,8 +7,6 @@ inputs:
     required: true
   repositories:
     description: 'Repository names separated by comma (,)'
-    required: true
-    default: ''
   owner:
     description: 'Owner of the repositories'
     default: ${{ github.repository_owner }}
