@@ -11,6 +11,7 @@ inputs:
     required: true
   owner:
     description: 'Owner of the repository'
+    default: ${{ github.repository_owner }}
     required: true
   prefix:
     description: 'Branch to check for tags'
