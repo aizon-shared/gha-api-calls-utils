@@ -22,4 +22,4 @@ outputs:
     description: 'JSON with the latest tag of each repository'
 runs:
   using: 'node16'
-  main: '../dist/get-latest-tags/index.js'
+  main: 'src/actions/getLatestTags.js'
