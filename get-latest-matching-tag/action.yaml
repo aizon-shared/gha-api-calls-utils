@@ -7,7 +7,7 @@ inputs:
     required: true
   repository:
     description: 'Repository name'
-    default: ${{ github.repository }}
+    default: ${{ github.event.repository.name }}
     required: true
   owner:
     description: 'Owner of the repository'
