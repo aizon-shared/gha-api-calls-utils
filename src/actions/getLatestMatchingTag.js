@@ -21,12 +21,11 @@ async function run() {
         core.setOutput('tag', latestTag);
         break;
       } else if (tags.length === 0) {
-        throw new Error(`Tag not found for the specified prefix (${prefix}) for repository ${repository}`);
+        break;
       }
       page++;
     }
   } catch (error) {
-    console.error(error);
     core.setFailed(error);
   }
 }

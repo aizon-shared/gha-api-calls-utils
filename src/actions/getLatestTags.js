@@ -30,7 +30,6 @@ async function run() {
 
     core.setOutput('latestTags', latestTags);
   } catch (error) {
-    console.error(error);
     core.setFailed(error);
   }
 }
