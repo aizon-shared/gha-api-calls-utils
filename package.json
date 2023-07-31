@@ -2,6 +2,7 @@
   "name": "gha-release-management",
   "version": "1.0.0",
   "description": "Defines the actions involved in the release process",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aizon-shared/gha-release-management.git"
