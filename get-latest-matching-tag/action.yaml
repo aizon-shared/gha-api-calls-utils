@@ -14,8 +14,7 @@ inputs:
     default: ${{ github.repository_owner }}
     required: true
   prefix:
-    description: 'Branch to check for tags'
-    default: ''
+    description: 'Prefix to match the tag against'
 outputs:
   tag:
     description: 'Name of the latest tag matching the prefix input if any'

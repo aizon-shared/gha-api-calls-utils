@@ -6,9 +6,9 @@ inputs:
     description: 'Github token'
     required: true
   repositories:
-    description: 'Array of repository names'
+    description: 'Repository names separated by comma (,)'
     required: true
-    default: '[]'
+    default: ''
   owner:
     description: 'Owner of the repositories'
     default: ${{ github.repository_owner }}
