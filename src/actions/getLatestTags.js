@@ -4,12 +4,9 @@ import { getOctokit } from "@actions/github";
 import getTags from '../helpers/githubApi/getTags';
 import getBranchCommit from '../helpers/githubApi/getBranchCommit';
 
-type repository = string;
-type tag = string;
-
-async function run(): Promise<void> {
+async function run() {
   try {
-    const repositories: Array<string> = core.getInput('repositories').split(',');
+    const repositories = core.getInput('repositories').split(',');
     const token = core.getInput('token');
     const owner = core.getInput('owner');
     const branch = core.getInput('branch');
@@ -29,12 +26,12 @@ async function run(): Promise<void> {
       return [repo, tagInLatestCommit];
     }));
 
-    const latestTags: Record<repository, tag> = Object.fromEntries(repoTagPairs);
+    const latestTags = Object.fromEntries(repoTagPairs);
 
     core.setOutput('latestTags', latestTags);
   } catch (error) {
     console.error(error);
-    core.setFailed(error as Error);
+    core.setFailed(error);
   }
 }
 
