@@ -12,7 +12,7 @@ Defines the actions involved in the release process
     - [Usage](#usage-1)
 
 ## get-latest-tags
-Takes an array of repository names and outputs a json with the latest tag of each repository. The key of the json is the repository name and the value is the latest tag.
+Takes repository names separated by comma (,) and outputs a json with the latest tag of each repository if it exists in the latest commit of the branch. The key of the json is the repository name and the value is the latest tag.
 
 ### Inputs
 
