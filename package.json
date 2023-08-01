@@ -1,0 +1,25 @@
+{
+  "name": "gha-release-management",
+  "version": "1.0.0",
+  "description": "Defines the actions involved in the release process",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aizon-shared/gha-release-management.git"
+  },
+  "keywords": [
+    "release",
+    "action"
+  ],
+  "author": "Aizon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aizon-shared/gha-release-management/issues"
+  },
+  "homepage": "https://github.com/aizon-shared/gha-release-management#readme",
+  "dependencies": {
+    "@actions/core": "1.10.0",
+    "@actions/github": "5.1.1",
+    "octokit": "3.0.0"
+  }
+}
