@@ -11,7 +11,7 @@ inputs:
   query:
     description: 'Query string to be run in Jira (JQL)'
   fields:
-    description: 'Fields to be returned by the query'
+    description: 'Fields to be returned by the query (separated by comma)'
   filter:
     description: 'Filter function to be run upon the issues of the query (js filter)'
 outputs:
