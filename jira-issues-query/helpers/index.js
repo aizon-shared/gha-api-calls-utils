@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import * as core from '@actions/core';
 
 export default async (host, token, query, fields, limit, startAt) => {
   const url = `${host}/rest/api/2/search?jql=${query}&fields=${fields}&maxResults=${limit}&startAt=${startAt}`;
@@ -11,6 +12,8 @@ export default async (host, token, query, fields, limit, startAt) => {
   });
 
   const data = await response.json();
+
+  core.debug(JSON.stringify(data));
 
   return data;
 };
