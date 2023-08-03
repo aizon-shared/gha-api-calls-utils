@@ -1,3 +1,4 @@
+import * as core from '@actions/core';
 import queryHelper from './helpers/index.js';
 
 async function run() {
