@@ -15,14 +15,13 @@ async function run() {
     let startAt = 0;
 
     const data = await queryHelper(host, token, query, fields, limit, startAt);
-    results = results.concat(data.issues);
+    results = results.concat(data.issues || []);
 
     while (data.total > startAt + limit) {
       startAt += limit;
 
       const data = await queryHelper(host, token, query, fields, limit, startAt);
-      
-      results = results.concat(data.issues);
+      results = results.concat(data.issues || []);
     }
 
     if (filter) {
