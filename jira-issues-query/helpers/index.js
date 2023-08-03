@@ -15,8 +15,8 @@ export default async (host, token, query, fields, limit, startAt) => {
 
   core.debug(JSON.stringify(data));
 
-  if (response.errorMessages && response.errorMessages.length > 0) {
-    throw new Error(response.errorMessages.join(', '));
+  if (data.errorMessages && data.errorMessages.length > 0) {
+    throw new Error(data.errorMessages.join(', '));
   }
 
   return data;
