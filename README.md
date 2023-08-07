@@ -1,7 +1,7 @@
-# gha-release-management
+# gha-api-calls-utils
 Defines the actions involved in the release process
 
-- [gha-release-management](#gha-release-management)
+- [gha-api-calls-utils](#gha-api-calls-utils)
   - [get-latest-tags](#get-latest-tags)
     - [Inputs](#inputs)
     - [Outputs](#outputs)
@@ -46,7 +46,7 @@ jobs:
     steps:
       - name: Step 1
         id: step1
-        uses: aizon-shared/gha-release-management/get-latest-tags@v1
+        uses: aizon-shared/gha-api-calls-utils/get-latest-tags@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repositories: repository1,repository2,repository3
@@ -83,7 +83,7 @@ jobs:
     steps:
       - name: Step 1
         id: step1
-        uses: aizon-shared/gha-release-management/get-latest-matching-tag@v1
+        uses: aizon-shared/gha-api-calls-utils/get-latest-matching-tag@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           prefix: v2.
@@ -119,7 +119,7 @@ jobs:
     steps:
       - name: Step 1
         id: step1
-        uses: aizon-shared/gha-release-management/jira-issues-query@v1
+        uses: aizon-shared/gha-api-calls-utils/jira-issues-query@v1
         with:
           host: ${{ env.JIRA_HOST }}
           token: ${{ secrets.JIRA_API_TOKEN }}
@@ -147,7 +147,7 @@ Takes a json where the keys are the repository names and the values are the tags
 ...
 - name: Step 1
   id: step1
-  uses: aizon-shared/gha-release-management/create-branches-from-tags@v1
+  uses: aizon-shared/gha-api-calls-utils/create-branches-from-tags@v1
   with:
     token: ${{ steps.get-token.outputs.token }}
     repositories: {"repo1":"v1.0.0", "repo2":"v1.0.1"}
