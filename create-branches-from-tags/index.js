@@ -6,10 +6,6 @@ import createRef from '../src/helpers/githubApi/createRef.js';
 
 async function run() {
   try {
-    console.log(core.getInput('repositories'))
-    console.log(JSON.parse(core.getInput('repositories')))
-    console.log(Object.entries(JSON.parse(core.getInput('repositories'))))
-    
     const token = core.getInput('token');
     const repositories = Object.entries(JSON.parse(core.getInput('repositories')));
     const branch = core.getInput('branch');
