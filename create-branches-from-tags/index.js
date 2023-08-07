@@ -1,7 +1,8 @@
 import * as core from '@actions/core';
 import { getOctokit } from "@actions/github";
 
-import getRefSha from '../src/helpers/githubApi/getRefSha.js';
+import getTag from '../src/helpers/githubApi/getTag.js';
+import getRef from '../src/helpers/githubApi/getRef.js';
 import createRef from '../src/helpers/githubApi/createRef.js';
 
 async function run() {
@@ -14,12 +15,9 @@ async function run() {
     const client = getOctokit(token);
 
     await Promise.all(repositories.map(async ([repo, tag]) => {
-      const originTagRef = `tags/${tag}`;
-      const finalBranchRef = `refs/heads/${branch}`;
-      const originalRefSha = await getRefSha(client, owner, repo, originTagRef);
-      console.log('sha: ', originalRefSha);
-      console.log('token: ', token);
-      await createRef(client, owner, repo, finalBranchRef, originalRefSha);
+      const tagInfo = await getRef(client, owner, repo, `tags/${tag}`);
+      const commitInfo = await getTag(client, owner, repo, tagInfo.object.sha);
+      await createRef(client, owner, repo, `refs/heads/${branch}`, commitInfo.object.sha);
     }));
   } catch (error) {
     core.setFailed(error);
