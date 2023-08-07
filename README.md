@@ -16,6 +16,7 @@ Defines the actions involved in the release process
     - [Usage](#usage-2)
   - [create-branches-from-tags](#create-branches-from-tags)
     - [Inputs](#inputs-3)
+    - [Usage](#usage-3)
 
 ## get-latest-tags
 Takes repository names separated by comma (,) and outputs a json with the latest tag of each repository if it exists in the latest commit of the branch. The key of the json is the repository name and the value is the latest tag.
@@ -43,8 +44,8 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Parse json and get latest tag for each repository
-        id: latest-tags
+      - name: Step 1
+        id: step1
         uses: aizon-shared/gha-release-management/get-latest-tags@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -80,8 +81,8 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Get latest tag matxing the release version
-        id: latest-matching-tag
+      - name: Step 1
+        id: step1
         uses: aizon-shared/gha-release-management/get-latest-matching-tag@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -116,9 +117,9 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-      - name: Check JIRA tickets pullrequests
-        id: check-tickets-pullrequests
-        uses: aizon-shared/gha-release-management/jira-issues-query@EX-179
+      - name: Step 1
+        id: step1
+        uses: aizon-shared/gha-release-management/jira-issues-query@v1
         with:
           host: ${{ env.JIRA_HOST }}
           token: ${{ secrets.JIRA_API_TOKEN }}
@@ -139,3 +140,17 @@ Takes a json where the keys are the repository names and the values are the tags
 | repositories | JSON where the keys are the repository names and the values are the tags to create branches from | true | |
 | branch | Name of the branch to create | true | |
 | owner | Owner of the repositories | true | `${{github.repository_owner}}` |
+
+### Usage
+
+```yaml
+...
+- name: Step 1
+  id: step1
+  uses: aizon-shared/gha-release-management/create-branches-from-tags@v1
+  with:
+    token: ${{ steps.get-token.outputs.token }}
+    repositories: {"repo1":"v1.0.0", "repo2":"v1.0.1"}
+    branch: ${{ env.BRANCH }}
+...
+```
