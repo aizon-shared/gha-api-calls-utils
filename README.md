@@ -151,6 +151,6 @@ Takes a json where the keys are the repository names and the values are the tags
   with:
     token: ${{ steps.get-token.outputs.token }}
     repositories: {"repo1":"v1.0.0", "repo2":"v1.0.1"}
-    branch: ${{ env.BRANCH }}
+    branch: ${{ env.BRANCH_NAME }}
 ...
 ```
