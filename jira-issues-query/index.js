@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import queryHelper from './helpers/index.js';
+import queryHelper from '../src/helpers/jiraApi/queryHelper.js';
 
 async function run() {
   try {

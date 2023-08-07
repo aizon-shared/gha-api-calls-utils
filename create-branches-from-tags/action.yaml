@@ -1,0 +1,20 @@
+name: 'Create branches from tags'
+author: Aizon.ai
+description: 'Takes a json where the keys are the repository names and the values are the tags to create branches from and creates a branch for each tag in the repository'
+inputs:
+  token:
+    description: 'Github token'
+    required: true
+  repositories:
+    description: 'JSON where the keys are the repository names and the values are the tags to create branches from'
+    required: true
+  branch:
+    description: 'Name of the branch to create'
+    required: true
+  owner:
+    description: 'Owner of the repository'
+    default: ${{ github.repository_owner }}
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'

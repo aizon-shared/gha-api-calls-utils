@@ -14,6 +14,8 @@ Defines the actions involved in the release process
     - [Inputs](#inputs-2)
     - [Outputs](#outputs-2)
     - [Usage](#usage-2)
+  - [create-branches-from-tags](#create-branches-from-tags)
+    - [Inputs](#inputs-3)
 
 ## get-latest-tags
 Takes repository names separated by comma (,) and outputs a json with the latest tag of each repository if it exists in the latest commit of the branch. The key of the json is the repository name and the value is the latest tag.
@@ -125,3 +127,15 @@ jobs:
           filter: (i) => i.fields.customfield_10000.includes("dataType=pullrequest, state=MERGED")
 ...
 ```
+
+## create-branches-from-tags
+Takes a json where the keys are the repository names and the values are the tags to create branches from and creates a branch for each tag in the repository
+
+### Inputs
+
+| Name | Description | Required | Default |
+| --- | --- | --- | --- |
+| token | Jira auth token | true | |
+| repositories | JSON where the keys are the repository names and the values are the tags to create branches from | true | |
+| branch | Name of the branch to create | true | |
+| owner | Owner of the repositories | true | `${{github.repository_owner}}` |
