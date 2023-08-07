@@ -17,6 +17,8 @@ async function run() {
       const originTagRef = `tags/${tag}`;
       const finalBranchRef = `refs/heads/${branch}`;
       const originalRefSha = await getRefSha(client, owner, repo, originTagRef);
+      console.log('sha: ', originalRefSha);
+      console.log('token: ', token);
       await createRef(client, owner, repo, finalBranchRef, originalRefSha);
     }));
   } catch (error) {
