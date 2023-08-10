@@ -27,8 +27,8 @@ Takes repository names separated by comma (,) and outputs a json with the latest
 | --- | --- | --- | --- |
 | token | Github token | true | |
 | repositories | Repository names separated by comma (,) | false | |
-| owner | Owner of the repositories | true | `${{github.repository_owner}}` |
-| branch | Branch to check for tags | true | main |
+| owner | Owner of the repositories | false | `${{github.repository_owner}}` |
+| branch | Branch to check for tags | false | main |
 
 ### Outputs
 | Name | Description |
@@ -63,8 +63,8 @@ Gets the latest tag matching the prefix input and outputs its name
 | Name | Description | Required | Default |
 | --- | --- | --- | --- |
 | token | Github token | true | |
-| repository | Repository name | true | `${{github.event.repository.name}}` |
-| owner | Owner of the repository | true | `${{github.repository_owner}}` |
+| repository | Repository name | false | `${{github.event.repository.name}}` |
+| owner | Owner of the repository | false | `${{github.repository_owner}}` |
 | prefix | Prefix to match the tag against | false | |
 
 ### Outputs
@@ -139,7 +139,7 @@ Takes a json where the keys are the repository names and the values are the tags
 | token | Jira auth token | true | |
 | repositories | JSON where the keys are the repository names and the values are the tags to create branches from | true | |
 | branch | Name of the branch to create | true | |
-| owner | Owner of the repositories | true | `${{github.repository_owner}}` |
+| owner | Owner of the repositories | false | `${{github.repository_owner}}` |
 
 ### Usage
 

@@ -8,11 +8,9 @@ inputs:
   repository:
     description: 'Repository name'
     default: ${{ github.event.repository.name }}
-    required: true
   owner:
     description: 'Owner of the repository'
     default: ${{ github.repository_owner }}
-    required: true
   prefix:
     description: 'Prefix to match the tag against'
 outputs:

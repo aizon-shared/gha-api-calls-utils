@@ -14,7 +14,6 @@ inputs:
   owner:
     description: 'Owner of the repository'
     default: ${{ github.repository_owner }}
-    required: true
 runs:
   using: 'node16'
   main: 'index.js'
