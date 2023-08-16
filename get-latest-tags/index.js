@@ -1,9 +1,6 @@
 import * as core from '@actions/core';
 import { getOctokit } from "@actions/github";
 
-import getTags from '../src/helpers/githubApi/getTags.js';
-import getBranchCommit from '../src/helpers/githubApi/getBranchCommit.js';
-
 async function run() {
   try {
     const repositories = core.getInput('repositories').split(',');
@@ -14,8 +11,17 @@ async function run() {
     const client = getOctokit(token);
 
     const repoTagPairs = await Promise.all(repositories.map(async (repo) => {
-      const commit = await getBranchCommit(client, owner, repo, branch);
-      const tags = await getTags(client, owner, repo);
+      const { data: branchInfo } = await client.rest.repos.getBranch({
+        owner,
+        repo,
+        branch,
+      });
+      const commit = branchInfo.commit.sha;
+      const { data: tags } = await client.rest.repos.listTags({
+        owner,
+        repo,
+        page,
+      });
 
       const tagInLatestCommit = tags.find((tag) => tag.commit.sha === commit)?.name;
 

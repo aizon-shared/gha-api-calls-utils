@@ -1,8 +1,6 @@
 import * as core from '@actions/core';
 import { getOctokit } from "@actions/github";
 
-import getTags from '../src/helpers/githubApi/getTags.js';
-
 async function run() {
   try {
     const repository = core.getInput('repository');
@@ -14,7 +12,11 @@ async function run() {
     let page = 1;
 
     while (true) {
-      const tags = await getTags(client, owner, repository, page);
+      const { data: tags } = await client.rest.repos.listTags({
+        owner,
+        repo: repository,
+        page,
+      });
       const tagsStartingWithPrefix = tags.filter((tag) => tag.name.startsWith(prefix));
       const latestTag = tagsStartingWithPrefix[0]?.name;
       if (latestTag) {
