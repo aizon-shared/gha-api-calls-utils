@@ -1,0 +1,22 @@
+name: 'Get latest check run status'
+author: Aizon.ai
+description: 'Gets the latest check run status for the last commit that have a check run with the given name. If no check run name is given, it will get the latest check run status found'
+inputs:
+  token:
+    description: 'Github token'
+    required: true
+  name:
+    description: 'Name of the check run to get the status from'
+    required: false
+  branch:
+    description: 'Name of the branch to get the check run status from'
+    required: true
+  owner:
+    description: 'Owner of the repository'
+    default: ${{ github.repository_owner }}
+  repository:
+    description: 'Repository name'
+    default: ${{ github.event.repository.name }}
+runs:
+  using: 'node16'
+  main: 'index.js'

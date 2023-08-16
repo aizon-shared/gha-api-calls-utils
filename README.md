@@ -17,6 +17,10 @@ Defines the actions involved in the release process
   - [create-branches-from-tags](#create-branches-from-tags)
     - [Inputs](#inputs-3)
     - [Usage](#usage-3)
+  - [get-latest-check-run-status](#get-latest-check-run-status)
+    - [Inputs](#inputs-4)
+    - [Outputs](#outputs-3)
+    - [Usage](#usage-4)
 
 ## get-latest-tags
 Takes repository names separated by comma (,) and outputs a json with the latest tag of each repository if it exists in the latest commit of the branch. The key of the json is the repository name and the value is the latest tag.
@@ -151,6 +155,37 @@ Takes a json where the keys are the repository names and the values are the tags
   with:
     token: ${{ steps.get-token.outputs.token }}
     repositories: {"repo1":"v1.0.0", "repo2":"v1.0.1"}
+    branch: ${{ env.BRANCH_NAME }}
+...
+```
+
+## get-latest-check-run-status
+Gets the latest check run status for the last commit that have a check run with the given name. If no check run name is given, it will get the latest check run status found (not in the last commit necessarily).
+
+### Inputs
+
+| Name | Description | Required | Default |
+| --- | --- | --- | --- |
+| token | Jira auth token | true | |
+| name | Name of the check run to get the status from | false | |
+| branch | Name of the branch to get the check run status from | true | |
+| owner | Owner of the repositories | false | `${{github.repository_owner}}` |
+| repository | Repository name | false | `${{github.event.repository.name}}` |
+
+### Outputs
+| Name | Description |
+| --- | --- |
+| runs | Array with jsons containing the name, status, conclusion and commit sha of the check runs found | 
+
+### Usage
+
+```yaml
+...
+- name: Step 1
+  id: step1
+  uses: aizon-shared/gha-api-calls-utils/get-latest-check-run-status@v1
+  with:
+    token: ${{ steps.get-token.outputs.token }}
     branch: ${{ env.BRANCH_NAME }}
 ...
 ```
