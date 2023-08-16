@@ -175,7 +175,7 @@ Gets the latest check run status for the last commit that have a check run with 
 ### Outputs
 | Name | Description |
 | --- | --- |
-| runs | JSON with the repository as key and an array with jsons containing the name, status, conclusion and commit sha of the check runs found as value | 
+| runs | JSON with the repository as key and an array with jsons containing the name, status, conclusion, commit sha and url of the check runs found as value | 
 
 ### Usage
 

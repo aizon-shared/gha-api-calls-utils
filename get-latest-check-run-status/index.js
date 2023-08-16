@@ -42,6 +42,7 @@ async function run() {
               status: checkRun.status,
               conclusion: checkRun.conclusion,
               sha: sha,
+              url: checkRun.html_url,
             });
           });
 
