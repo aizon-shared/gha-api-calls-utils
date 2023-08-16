@@ -8,49 +8,58 @@ async function run() {
     const name = core.getInput('name') || undefined;
     const branch = core.getInput('branch');
     const owner = core.getInput('owner');
-    const repository = core.getInput('repository');
+    const repositories = core.getInput('repositories').split(',');
 
     const client = getOctokit(token);
-    const runs = [];
 
-    while (true) {
-      const { data: commits } = await client.rest.repos.listCommits({
-        owner,
-        repo: repository,
-        sha: branch,
-        page,
-      });
+    const results = await Promise.all(repositories.map(async (repo) => {
+      const runs = [];
+      let page = 1;
 
-      for (var i = 0; i < commits.length; i++) {
-        const sha = commits[i].sha;
-        const { data: checkRuns } = await client.rest.checks.listForRef({
+      while (true) {
+        const { data: commits } = await client.rest.repos.listCommits({
           owner,
-          repo: repository,
-          ref: sha,
-          check_name: name,
+          repo,
+          sha: branch,
+          per_page: 100,
+          page,
         });
 
-        checkRuns.check_runs.forEach(checkRun => {
-          runs.push({
-            name: checkRun.name,
-            status: checkRun.status,
-            conclusion: checkRun.conclusion,
-            sha: sha,
+        for (var i = 0; i < commits.length; i++) {
+          const sha = commits[i].sha;
+          const { data: checkRuns } = await client.rest.checks.listForRef({
+            owner,
+            repo,
+            ref: sha,
+            check_name: name,
+            per_page: 100,
           });
-        });
 
-        if (runs.length > 0) {
+          checkRuns.check_runs.forEach(checkRun => {
+            runs.push({
+              repository: repo,
+              name: checkRun.name,
+              status: checkRun.status,
+              conclusion: checkRun.conclusion,
+              sha: sha,
+            });
+          });
+
+          if (runs.length > 0) {
+            break;
+          }
+        }
+
+        if (runs.length > 0 || commits.length === 0) {
           break;
         }
+        page++;
       }
 
-      if (commits.length === 0) {
-        break;
-      }
-      page++;
-    }
+      return [repo, runs];
+    }));
 
-    core.setOutput('runs', runs);
+    core.setOutput('runs', Object.fromEntries(results));
   } catch (error) {
     core.setFailed(error);
   }

@@ -170,12 +170,12 @@ Gets the latest check run status for the last commit that have a check run with 
 | name | Name of the check run to get the status from | false | |
 | branch | Name of the branch to get the check run status from | true | |
 | owner | Owner of the repositories | false | `${{github.repository_owner}}` |
-| repository | Repository name | false | `${{github.event.repository.name}}` |
+| repositories | Repository names separated by comma (,) | true | |
 
 ### Outputs
 | Name | Description |
 | --- | --- |
-| runs | Array with jsons containing the name, status, conclusion and commit sha of the check runs found | 
+| runs | JSON with the repository as key and an array with jsons containing the name, status, conclusion and commit sha of the check runs found as value | 
 
 ### Usage
 
@@ -187,5 +187,6 @@ Gets the latest check run status for the last commit that have a check run with 
   with:
     token: ${{ steps.get-token.outputs.token }}
     branch: ${{ env.BRANCH_NAME }}
+    repositories: repo1,repo2,repo3
 ...
 ```

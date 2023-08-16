@@ -14,9 +14,9 @@ inputs:
   owner:
     description: 'Owner of the repository'
     default: ${{ github.repository_owner }}
-  repository:
-    description: 'Repository name'
-    default: ${{ github.event.repository.name }}
+  repositories:
+    description: 'Repository names separated by comma (,)'
+    required: true
 runs:
   using: 'node16'
   main: 'index.js'
