@@ -103,8 +103,8 @@ Runs a query in Jira issues and run a filter upon the results if the filter is p
 | --- | --- | --- | --- |
 | token | Jira auth token | true | |
 | host | Jira host | true | |
-| query | Query string to be run in Jira (JQL) | false | |
-| fields | Fields to be returned by the query (separated by comma) | false | |
+| query | Query string to be run in Jira (JQL) | true | |
+| fields | Fields to be returned by the query (separated by comma) | true | |
 | filter | Filter function to be run upon the issues of the query (js filter) | false | |
 
 ### Outputs

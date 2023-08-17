@@ -10,8 +10,10 @@ inputs:
     required: true
   query:
     description: 'Query string to be run in Jira (JQL)'
+    required: true
   fields:
     description: 'Fields to be returned by the query (separated by comma)'
+    required: true
   filter:
     description: 'Filter function to be run upon the issues of the query (js filter)'
 outputs:
