@@ -20,7 +20,6 @@ async function run() {
       const { data: tags } = await client.rest.repos.listTags({
         owner,
         repo,
-        page,
       });
 
       const tagInLatestCommit = tags.find((tag) => tag.commit.sha === commit)?.name;

@@ -160,7 +160,7 @@ Takes a json where the keys are the repository names and the values are the tags
 ```
 
 ## get-latest-check-run-status
-Gets the latest check run status for the last commit that have a check run with the given name. If no check run name is given, it will get the latest check run status found (not in the last commit necessarily).
+Gets the latest check run status for the last commit that have a check run with the given name. If no check run name is given, it will get the latest check runs status found in the latest commit with associated check runs (not in the last commit necessarily).
 
 ### Inputs
 
@@ -171,6 +171,7 @@ Gets the latest check run status for the last commit that have a check run with 
 | branch | Name of the branch to get the check run status from | true | |
 | owner | Owner of the repositories | false | `${{github.repository_owner}}` |
 | repositories | Repository names separated by comma (,) | true | |
+| commits-page | Commits page number to get the check run status from (each page are 100 commits) | false | 1 |
 
 ### Outputs
 | Name | Description |

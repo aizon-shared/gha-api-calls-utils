@@ -21,12 +21,22 @@ async function run() {
         repo,
         tag_sha: tagInfo.object.sha,
       });
-      await client.rest.git.createRef({
+      const existsBranch = await client.rest.git.getRef({
         owner,
         repo,
-        ref: `refs/heads/${branch}`,
-        sha: commitInfo.object.sha,
-      });
+        ref: `heads/${branch}`,
+      })
+
+      if (existsBranch.status === 404) {
+        await client.rest.git.createRef({
+          owner,
+          repo,
+          ref: `refs/heads/${branch}`,
+          sha: commitInfo.object.sha,
+        });
+      } else {
+        console.log(`Skipping ${repo} because branch ${branch} already exists`);
+      }
     }));
   } catch (error) {
     core.setFailed(error);
