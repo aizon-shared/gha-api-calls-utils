@@ -24,10 +24,10 @@ async function run() {
       const existsBranch = await client.rest.git.getRef({
         owner,
         repo,
-        ref: branch,
+        ref: `heads/${branch}`,
       })
 
-      if (existsBranch.status === 200) {
+      if (existsBranch.status === 404) {
         await client.rest.git.createRef({
           owner,
           repo,
