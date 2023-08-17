@@ -10,11 +10,9 @@ inputs:
   owner:
     description: 'Owner of the repositories'
     default: ${{ github.repository_owner }}
-    required: true
   branch:
     description: 'Branch to check for tags'
     default: 'main'
-    required: true
 outputs:
   latestTags:
     description: 'JSON with the latest tag of each repository'

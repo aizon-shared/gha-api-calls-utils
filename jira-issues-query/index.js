@@ -1,5 +1,5 @@
 import * as core from '@actions/core';
-import queryHelper from '../src/helpers/jiraApi/jqlSearch.js';
+import jqlSearch from '../src/helpers/jiraApi/jqlSearch.js';
 
 async function run() {
   try {
@@ -14,13 +14,13 @@ async function run() {
     const limit = 100;
     let startAt = 0;
 
-    const data = await queryHelper(host, token, query, fields, limit, startAt);
+    const data = await jqlSearch(host, token, query, fields, limit, startAt);
     results = results.concat(data.issues || []);
 
     while (data.total > startAt + limit) {
       startAt += limit;
 
-      const data = await queryHelper(host, token, query, fields, limit, startAt);
+      const data = await jqlSearch(host, token, query, fields, limit, startAt);
       results = results.concat(data.issues || []);
     }
 

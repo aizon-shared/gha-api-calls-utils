@@ -17,6 +17,10 @@ Defines the actions involved in the release process
   - [create-branches-from-tags](#create-branches-from-tags)
     - [Inputs](#inputs-3)
     - [Usage](#usage-3)
+  - [get-latest-check-run-status](#get-latest-check-run-status)
+    - [Inputs](#inputs-4)
+    - [Outputs](#outputs-3)
+    - [Usage](#usage-4)
 
 ## get-latest-tags
 Takes repository names separated by comma (,) and outputs a json with the latest tag of each repository if it exists in the latest commit of the branch. The key of the json is the repository name and the value is the latest tag.
@@ -27,8 +31,8 @@ Takes repository names separated by comma (,) and outputs a json with the latest
 | --- | --- | --- | --- |
 | token | Github token | true | |
 | repositories | Repository names separated by comma (,) | false | |
-| owner | Owner of the repositories | true | `${{github.repository_owner}}` |
-| branch | Branch to check for tags | true | main |
+| owner | Owner of the repositories | false | `${{github.repository_owner}}` |
+| branch | Branch to check for tags | false | main |
 
 ### Outputs
 | Name | Description |
@@ -63,8 +67,8 @@ Gets the latest tag matching the prefix input and outputs its name
 | Name | Description | Required | Default |
 | --- | --- | --- | --- |
 | token | Github token | true | |
-| repository | Repository name | true | `${{github.event.repository.name}}` |
-| owner | Owner of the repository | true | `${{github.repository_owner}}` |
+| repository | Repository name | false | `${{github.event.repository.name}}` |
+| owner | Owner of the repository | false | `${{github.repository_owner}}` |
 | prefix | Prefix to match the tag against | false | |
 
 ### Outputs
@@ -99,8 +103,8 @@ Runs a query in Jira issues and run a filter upon the results if the filter is p
 | --- | --- | --- | --- |
 | token | Jira auth token | true | |
 | host | Jira host | true | |
-| query | Query string to be run in Jira (JQL) | false | |
-| fields | Fields to be returned by the query (separated by comma) | false | |
+| query | Query string to be run in Jira (JQL) | true | |
+| fields | Fields to be returned by the query (separated by comma) | true | |
 | filter | Filter function to be run upon the issues of the query (js filter) | false | |
 
 ### Outputs
@@ -139,7 +143,7 @@ Takes a json where the keys are the repository names and the values are the tags
 | token | Jira auth token | true | |
 | repositories | JSON where the keys are the repository names and the values are the tags to create branches from | true | |
 | branch | Name of the branch to create | true | |
-| owner | Owner of the repositories | true | `${{github.repository_owner}}` |
+| owner | Owner of the repositories | false | `${{github.repository_owner}}` |
 
 ### Usage
 
@@ -152,5 +156,37 @@ Takes a json where the keys are the repository names and the values are the tags
     token: ${{ steps.get-token.outputs.token }}
     repositories: {"repo1":"v1.0.0", "repo2":"v1.0.1"}
     branch: ${{ env.BRANCH_NAME }}
+...
+```
+
+## get-latest-check-run-status
+Gets the latest check run status for the last commit that have a check run with the given name. If no check run name is given, it will get the latest check run status found (not in the last commit necessarily).
+
+### Inputs
+
+| Name | Description | Required | Default |
+| --- | --- | --- | --- |
+| token | Jira auth token | true | |
+| name | Name of the check run to get the status from | false | |
+| branch | Name of the branch to get the check run status from | true | |
+| owner | Owner of the repositories | false | `${{github.repository_owner}}` |
+| repositories | Repository names separated by comma (,) | true | |
+
+### Outputs
+| Name | Description |
+| --- | --- |
+| runs | JSON with the repository as key and an array with jsons containing the name, status, conclusion, commit sha and url of the check runs found as value | 
+
+### Usage
+
+```yaml
+...
+- name: Step 1
+  id: step1
+  uses: aizon-shared/gha-api-calls-utils/get-latest-check-run-status@v1
+  with:
+    token: ${{ steps.get-token.outputs.token }}
+    branch: ${{ env.BRANCH_NAME }}
+    repositories: repo1,repo2,repo3
 ...
 ```
