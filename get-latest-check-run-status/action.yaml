@@ -1,6 +1,6 @@
 name: 'Get latest check run status'
 author: Aizon.ai
-description: 'Gets the latest check run status for the last commit that have a check run with the given name. If no check run name is given, it will get the latest check run status found'
+description: 'Gets the latest check run status for the last commit that have a check run with the given name. If no check run name is given, it will get the latest check runs status found in the latest commit with associated check runs.'
 inputs:
   token:
     description: 'Github token'
@@ -17,6 +17,9 @@ inputs:
   repositories:
     description: 'Repository names separated by comma (,)'
     required: true
+  commits-page:
+    description: 'Commits page number to get the check run status from (each page are 100 commits)'
+    default: '1'
 runs:
   using: 'node16'
   main: 'index.js'
