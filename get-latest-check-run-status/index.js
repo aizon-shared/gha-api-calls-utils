@@ -9,7 +9,7 @@ async function run() {
     const branch = core.getInput('branch');
     const owner = core.getInput('owner');
     const repositories = core.getInput('repositories').split(',');
-    const commitsPage = core.getInput('commits-page');
+    const limit = core.getInput('limit');
 
     const client = getOctokit(token);
 
@@ -19,8 +19,7 @@ async function run() {
         owner,
         repo,
         sha: branch,
-        per_page: 100,
-        page: parseInt(commitsPage),
+        per_page: parseInt(limit),
       });
 
       for (var i = 0; i < commits.length; i++) {

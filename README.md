@@ -171,7 +171,7 @@ Gets the latest check run status for the last commit that have a check run with 
 | branch | Name of the branch to get the check run status from | true | |
 | owner | Owner of the repositories | false | `${{github.repository_owner}}` |
 | repositories | Repository names separated by comma (,) | true | |
-| commits-page | Commits page number to get the check run status from (each page are 100 commits) | false | 1 |
+| limit | Number of commits to scan and get the check run status from (max. 100) | false | 10 |
 
 ### Outputs
 | Name | Description |
