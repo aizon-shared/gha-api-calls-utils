@@ -17,9 +17,9 @@ inputs:
   repositories:
     description: 'Repository names separated by comma (,)'
     required: true
-  commits-page:
-    description: 'Commits page number to get the check run status from (each page are 100 commits)'
-    default: '1'
+  limit:
+    description: 'Number of commits to scan and get the check run status from (max. 100)'
+    default: '10'
 runs:
   using: 'node16'
   main: 'index.js'
