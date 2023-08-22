@@ -1,5 +1,5 @@
 # gha-api-calls-utils
-Defines the actions involved in the release process
+Defines the actions useful for making API calls to Github and Jira.
 
 - [gha-api-calls-utils](#gha-api-calls-utils)
   - [get-latest-tags](#get-latest-tags)

@@ -16,11 +16,6 @@ async function run() {
         repo,
         ref: `tags/${tag}`,
       });
-      const { data: commitInfo } = await client.rest.git.getTag({
-        owner,
-        repo,
-        tag_sha: tagInfo.object.sha,
-      });
       const existsBranch = await client.rest.git.getRef({
         owner,
         repo,
@@ -32,7 +27,7 @@ async function run() {
           owner,
           repo,
           ref: `refs/heads/${branch}`,
-          sha: commitInfo.object.sha,
+          sha: tagInfo.object.sha,
         });
       } else {
         console.log(`Skipping ${repo} because branch ${branch} already exists`);
