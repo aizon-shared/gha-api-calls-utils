@@ -14,41 +14,55 @@ async function run() {
     const client = getOctokit(token);
 
     const results = await Promise.all(repositories.map(async (repo) => {
-      const runs = [];
-      const { data: commits } = await client.rest.repos.listCommits({
-        owner,
-        repo,
-        sha: branch,
-        per_page: parseInt(limit),
-      });
-
-      for (var i = 0; i < commits.length; i++) {
-        const sha = commits[i].sha;
-        const { data: checkRuns } = await client.rest.checks.listForRef({
+      const runs = new Map();
+      try {
+        const { data: commits } = await client.rest.repos.listCommits({
           owner,
           repo,
-          ref: sha,
-          check_name: name,
-          per_page: 100,
+          sha: branch,
+          per_page: parseInt(limit),
         });
 
-        checkRuns.check_runs.forEach(checkRun => {
-          runs.push({
-            repository: repo,
-            name: checkRun.name,
-            status: checkRun.status,
-            conclusion: checkRun.conclusion,
-            sha: sha,
-            url: checkRun.html_url,
-          });
-        });
+        for (var i = 0; i < commits.length; i++) {
+          const sha = commits[i].sha;
+          try {
+            const { data: checkRuns } = await client.rest.checks.listForRef({
+              owner,
+              repo,
+              ref: sha,
+              check_name: name,
+              per_page: 100,
+            });
 
-        if (runs.length > 0) {
-          break;
+            checkRuns.check_runs.forEach(checkRun => {
+              const latestRun = runs.get(run.name);
+              if (!latestRun || new Date(run.completed_at) > new Date(latestRun.completed_at)) {
+                runs.set(run.name, {
+                  repository: repo,
+                  name: checkRun.name,
+                  status: checkRun.status,
+                  conclusion: checkRun.conclusion,
+                  sha: sha,
+                  url: checkRun.html_url,
+                  completed_at: checkRun.completed_at,
+                });
+              }
+            });
+          } catch (error) {
+            core.error(`Failed to list check runs for repository: ${repo} ref: ${sha}`);
+            throw error;
+          }
+
+          if (runs.size > 0) {
+            break;
+          }
         }
+      } catch (error) {
+        core.error(`Failed to list commits for repository: ${repo} ref: ${branch}`);
+        throw error;
       }
 
-      return [repo, runs];
+      return [repo, Array.from(runs.values())];
     }));
 
     core.setOutput('runs', Object.fromEntries(results));
