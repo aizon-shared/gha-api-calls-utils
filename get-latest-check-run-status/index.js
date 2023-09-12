@@ -35,9 +35,9 @@ async function run() {
             });
 
             checkRuns.check_runs.forEach(checkRun => {
-              const latestRun = runs.get(run.name);
-              if (!latestRun || new Date(run.completed_at) > new Date(latestRun.completed_at)) {
-                runs.set(run.name, {
+              const latestRun = runs.get(checkRun.name);
+              if (!latestRun || new Date(checkRun.completed_at) > new Date(latestRun.completed_at)) {
+                runs.set(checkRun.name, {
                   repository: repo,
                   name: checkRun.name,
                   status: checkRun.status,
