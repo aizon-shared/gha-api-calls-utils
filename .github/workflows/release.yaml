@@ -1,0 +1,19 @@
+name: "Create release"
+
+on:
+  push:
+    branches: 
+      - main
+      - release/*
+
+permissions: 
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    secrets: inherit
+    uses: aizon-shared/common-workflows/.github/workflows/release.yaml@v1
+    with:
+      major-release: true
