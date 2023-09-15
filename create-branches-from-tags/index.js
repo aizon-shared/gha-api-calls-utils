@@ -26,6 +26,7 @@ async function run() {
         core.info(`Skipping ${repo} because branch ${branch} already exists`);
       } catch (error) {
         if (error.status === 404) {
+          core.info(`Creating branch ${branch} from in sha ${tagInfo.object.sha} in ${repo}`);
           await client.rest.git.createRef({
             owner,
             repo,
@@ -33,6 +34,7 @@ async function run() {
             sha: tagInfo.object.sha,
           });
         } else {
+          core.error(error);
           throw error;
         }
       }
